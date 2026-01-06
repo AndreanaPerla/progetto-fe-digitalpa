@@ -1,0 +1,13 @@
+:root {
+  --main-color: #0d1a73;
+  --title: #2a2a2a;
+  --text: #363634;
+  --light-grey: #cdcdcc;
+  --light-grey-op: #cdcdcc40;
+  --grey: #bebebe;
+  --secondary-blue: #0021dd;
+
+  --sidebar-width: 350px;
+
+  background-color: #ffffff;
+}
