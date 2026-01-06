@@ -6,7 +6,7 @@ import PhotoDetail from "../views/PhotoDetail.vue";
 const routes = [
   {
     path: "/",
-    name: "Gallery",
+    name: "Galleria",
     component: Gallery,
     meta: {
       showInNavbar: true,
@@ -14,7 +14,7 @@ const routes = [
   },
   {
     path: "/upload",
-    name: "Upload",
+    name: "Carica Foto",
     component: Upload,
     meta: {
       showInNavbar: true,
@@ -24,6 +24,9 @@ const routes = [
     path: "/photo/:id",
     name: "PhotoDetail",
     component: PhotoDetail,
+    meta: {
+      showInNavbar: false,
+    },
   },
 ];
 

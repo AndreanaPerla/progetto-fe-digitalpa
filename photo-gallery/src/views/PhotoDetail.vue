@@ -143,14 +143,30 @@ export default {
 
     const formatDate = (dateString) => {
       if (!dateString) return "N/A";
-      const date = new Date(dateString.replace(/:/g, "-").replace(" ", "T"));
-      return date.toLocaleDateString("it-IT", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-      });
+      try {
+        // Formato EXIF: "2023:08:15 14:32:18"
+        // Convertiamo in formato ISO: "2023-08-15T14:32:18"
+        const isoString = dateString.replace(
+          /^(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})$/,
+          "$1-$2-$3T$4:$5:$6"
+        );
+
+        const date = new Date(isoString);
+
+        if (isNaN(date.getTime())) {
+          return dateString; // Ritorna la stringa originale se la conversione fallisce
+        }
+
+        return date.toLocaleDateString("it-IT", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      } catch (error) {
+        return dateString; // Ritorna la stringa originale in caso di errore
+      }
     };
 
     return {
