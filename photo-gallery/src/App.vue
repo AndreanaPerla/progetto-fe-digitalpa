@@ -5,8 +5,8 @@
         <h1 class="text-xl font-bold">Photo Gallery</h1>
         <div class="space-x-4">
           <router-link to="/" class="hover:text-blue-200">Home</router-link>
-          <router-link to="/gallery" class="hover:text-blue-200"
-            >Gallery</router-link
+          <router-link to="/upload" class="hover:text-blue-200"
+            >Carica Foto</router-link
           >
         </div>
       </div>
