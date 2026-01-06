@@ -20,15 +20,15 @@
         class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300"
       >
         <img
-          :src="photo.thumbnailUrl"
-          :alt="photo.title"
+          :src="photo.url"
+          :alt="photo.fileName"
           class="w-full h-48 object-cover"
         />
         <div class="p-4">
           <h3 class="text-sm font-semibold text-gray-800 truncate">
-            {{ photo.title }}
+            {{ photo.fileName.split(".")[0] }}
           </h3>
-          <p class="text-xs text-gray-600 mt-1">ID: {{ photo.id }}</p>
+          <p class="text-xs text-gray-600 mt-1">{{ photo.fileSize }}</p>
         </div>
       </div>
     </div>

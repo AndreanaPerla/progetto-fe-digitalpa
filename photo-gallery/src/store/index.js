@@ -1,5 +1,4 @@
 import { createStore } from "vuex";
-import axios from "axios";
 
 export default createStore({
   state: {
@@ -22,10 +21,9 @@ export default createStore({
     async fetchPhotos({ commit }) {
       commit("SET_LOADING", true);
       try {
-        const response = await axios.get(
-          "https://jsonplaceholder.typicode.com/photos?_limit=20"
-        );
-        commit("SET_PHOTOS", response.data);
+        const response = await fetch("/src/assets/photos-data.json");
+        const photos = await response.json();
+        commit("SET_PHOTOS", photos);
         commit("SET_ERROR", null);
       } catch (error) {
         commit("SET_ERROR", error.message);
