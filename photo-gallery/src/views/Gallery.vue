@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1 class="text-3xl font-bold text-gray-800 mb-6">Galleria Fotografica</h1>
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">galleria immagini</h1>
+    <!-- <h1 class="text-3xl font-bold text-gray-800 mb-6">Galleria Fotografica</h1>
 
     <div v-if="isLoading" class="text-center">
       <p class="text-lg text-gray-600">Caricamento foto...</p>
@@ -32,7 +33,7 @@
           <p class="text-xs text-gray-600 mt-1">{{ photo.fileSize }}</p>
         </div>
       </router-link>
-    </div>
+    </div> -->
   </div>
 </template>
 

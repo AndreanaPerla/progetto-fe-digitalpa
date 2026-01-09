@@ -5,6 +5,7 @@ export default createStore({
     photos: [],
     loading: false,
     error: null,
+    sidebarOpen: true,
   },
   mutations: {
     SET_PHOTOS(state, photos) {
@@ -15,6 +16,9 @@ export default createStore({
     },
     SET_ERROR(state, error) {
       state.error = error;
+    },
+    SET_SIDEBAR_OPEN(state, isOpen) {
+      state.sidebarOpen = isOpen;
     },
   },
   actions: {

@@ -5,6 +5,7 @@
         v-for="route in navbarRoutes"
         :key="route.name"
         :to="route.path"
+        @click="handleRouteClick(route)"
         class="sidebar-link mb-2"
         :class="{ active: $route.path === route.path }"
       >
@@ -18,11 +19,13 @@
 <script>
 import { computed } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 
 export default {
   name: "Navbar",
   setup() {
     const router = useRouter();
+    const store = useStore();
 
     const navbarRoutes = computed(() => {
       return router
@@ -36,8 +39,14 @@ export default {
         }));
     });
 
+    const handleRouteClick = (route) => {
+      router.push(route.path);
+      store.commit("SET_SIDEBAR_OPEN", true);
+    };
+
     return {
       navbarRoutes,
+      handleRouteClick,
     };
   },
 };
