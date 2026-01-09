@@ -1,7 +1,8 @@
 <template>
-  <div id="app">
+  <div id="app-main">
+    <div class="app-top"></div>
     <Navbar />
-    <main class="container mx-auto p-4">
+    <main class="main-content">
       <RouterView />
     </main>
   </div>

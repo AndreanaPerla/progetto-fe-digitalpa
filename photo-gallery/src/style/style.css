@@ -1,4 +1,5 @@
 @import url("./_general.css");
+@import url("./_navbar.css");
 
 @tailwind base;
 @tailwind components;

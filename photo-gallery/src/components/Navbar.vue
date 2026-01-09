@@ -1,19 +1,18 @@
 <template>
-  <nav class="bg-blue-600 text-white p-4">
-    <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-xl font-bold">Photo Gallery</h1>
-      <div class="space-x-4">
-        <router-link
-          v-for="route in navbarRoutes"
-          :key="route.name"
-          :to="route.path"
-          class="hover:text-blue-200"
-        >
-          {{ route.displayName }}
-        </router-link>
-      </div>
-    </div>
-  </nav>
+  <aside class="sidebar">
+    <nav class="sidebar-nav">
+      <router-link
+        v-for="route in navbarRoutes"
+        :key="route.name"
+        :to="route.path"
+        class="sidebar-link mb-2"
+        :class="{ active: $route.path === route.path }"
+      >
+        <span class="material-icons link-icon">{{ route.icon }}</span>
+        <div class="link-text mt-2">{{ route.displayName }}</div>
+      </router-link>
+    </nav>
+  </aside>
 </template>
 
 <script>
@@ -33,6 +32,7 @@ export default {
           name: route.name,
           path: route.path,
           displayName: route.name,
+          icon: route.meta?.icon || "description",
         }));
     });
 

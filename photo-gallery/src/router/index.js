@@ -10,6 +10,7 @@ const routes = [
     component: Gallery,
     meta: {
       showInNavbar: true,
+      icon: "photo_library",
     },
   },
   {
@@ -18,6 +19,7 @@ const routes = [
     component: Upload,
     meta: {
       showInNavbar: true,
+      icon: "cloud_upload",
     },
   },
   {

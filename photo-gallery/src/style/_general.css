@@ -1,13 +1,64 @@
 :root {
-  --main-color: #0d1a73;
-  --title: #2a2a2a;
-  --text: #363634;
-  --light-grey: #cdcdcc;
-  --light-grey-op: #cdcdcc40;
-  --grey: #bebebe;
-  --secondary-blue: #0021dd;
+  /* colors */
+  --main-color: #0c364f;
+  --title: #1a2933;
+  --blue: #1876d0;
+  --light-blue: #ebf1f5;
+  --grad-blue-light: #00639e;
+  --grad-blue-dark: #03354c;
+  --grad-green-light: #00b135;
+  --grad-green-dark: #005d14;
+  --grey: #cfdce5;
+  --white: #ffffff;
+  --orange: #ff7e22;
 
-  --sidebar-width: 350px;
+  /* spacing */
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
 
-  background-color: #ffffff;
+  /* border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-xxl: 32px;
+
+  /* Typography */
+  --font-family: "Roboto", sans-serif;
+  --font-size-xxs: 10px;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 32px;
+  --font-size-4xl: 36px;
+
+  --sidebar-width: 260px;
+}
+
+* {
+  font-family: var(--font-family);
+}
+
+#app-main {
+  min-height: 100vh;
+}
+
+.app-top {
+  height: 47px;
+  background-color: var(--main-color);
+}
+
+.main-content {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  padding: var(--space-xl);
+  background-color: var(--light-blue);
+  min-height: 100vh;
 }
