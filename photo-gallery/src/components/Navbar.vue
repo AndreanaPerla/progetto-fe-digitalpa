@@ -54,7 +54,7 @@ export default {
 
     const handleRouteClick = (route) => {
       router.push(route.path);
-      store.commit("SET_SIDEBAR_OPEN", true);
+      // store.commit("SET_SIDEBAR_OPEN", true);
     };
 
     return {

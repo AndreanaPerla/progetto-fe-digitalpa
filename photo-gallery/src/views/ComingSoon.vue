@@ -1,7 +1,9 @@
 <template>
   <div class="coming-soon">
     <div class="coming-soon-content">
-      <h1 class="coming-soon-title">In arrivo</h1>
+      <div class="coming-soon-icon">
+        <span class="material-icons">construction</span>
+      </div>
       <p class="coming-soon-message">
         Questa funzionalità sarà disponibile presto.
       </p>
@@ -28,11 +30,14 @@ export default {
   padding: var(--space-2xl);
 }
 
-.coming-soon-title {
-  font-size: var(--font-size-4xl);
-  color: var(--main-color);
+.coming-soon-icon {
   margin-bottom: var(--space-lg);
-  font-weight: 600;
+}
+
+.coming-soon-icon .material-icons {
+  font-size: 3rem;
+  color: var(--main-color);
+  opacity: 0.6;
 }
 
 .coming-soon-message {

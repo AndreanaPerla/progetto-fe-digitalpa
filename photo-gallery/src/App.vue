@@ -3,7 +3,10 @@
     <div class="app-top"></div>
     <Navbar />
     <main class="main-content" :class="{ 'with-submenu': isSubmenuOpen }">
-      <RouterView />
+      <PageHeader />
+      <div class="page-content">
+        <RouterView />
+      </div>
     </main>
     <LateralSidebar />
   </div>
@@ -14,12 +17,14 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 import Navbar from "./components/Navbar.vue";
 import LateralSidebar from "./components/LateralSidebar.vue";
+import PageHeader from "./components/PageHeader.vue";
 
 export default {
   name: "App",
   components: {
     Navbar,
     LateralSidebar,
+    PageHeader,
   },
   setup() {
     const store = useStore();

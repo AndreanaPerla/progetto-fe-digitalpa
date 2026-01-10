@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1 class="text-3xl font-bold text-gray-800 mb-6">galleria immagini</h1>
     <!-- <h1 class="text-3xl font-bold text-gray-800 mb-6">Galleria Fotografica</h1>
 
     <div v-if="isLoading" class="text-center">

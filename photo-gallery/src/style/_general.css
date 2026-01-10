@@ -11,6 +11,7 @@
   --grey: #cfdce5;
   --white: #ffffff;
   --orange: #ff7e22;
+  --content: #1a2933;
 
   /* spacing */
   --space-xs: 8px;
@@ -70,7 +71,6 @@ body {
   flex: 1;
   margin-left: 88px;
   margin-top: 47px;
-  padding: var(--space-xl);
   background-color: var(--light-blue);
   min-height: calc(100vh - 47px);
   border-radius: var(--radius-xl) 0 0 0;
