@@ -1,5 +1,6 @@
 .page-header {
   padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--grey);
   background-color: var(--white);
   border-radius: var(--radius-xxl) 0 0 0;
   transition: margin-left 0.3s ease, background-color 0.3s ease,
@@ -72,6 +73,11 @@
   text-decoration: none;
 }
 
+.breadcrumb-clock {
+  font-size: var(--font-size-base);
+  color: var(--blue);
+}
+
 .breadcrumb-separator {
   display: flex;
 }
@@ -79,4 +85,5 @@
 .breadcrumb-separator .material-icons {
   font-size: var(--font-size-base);
   color: var(--content);
+  opacity: 0.6;
 }

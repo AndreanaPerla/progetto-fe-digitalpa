@@ -17,6 +17,15 @@
           <h1 class="page-title">{{ pageTitle }}</h1>
         </div>
         <nav class="breadcrumb" v-if="breadcrumbItems.length > 0">
+          <!-- Icona orologio come primo elemento fisso -->
+          <span class="breadcrumb-item">
+            <span class="material-icons breadcrumb-clock">schedule</span>
+            <span class="breadcrumb-separator mx-1">
+              <span class="material-icons">chevron_right</span>
+            </span>
+          </span>
+          
+          <!-- Rest of breadcrumb items -->
           <span
             class="breadcrumb-item"
             v-for="(item, index) in breadcrumbItems"
