@@ -5,7 +5,7 @@ export default createStore({
     photos: [],
     loading: false,
     error: null,
-    sidebarOpen: true,
+    sidebarOpen: false,
   },
   mutations: {
     SET_PHOTOS(state, photos) {

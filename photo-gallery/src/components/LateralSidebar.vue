@@ -35,13 +35,54 @@ export default {
     const isOpen = computed(() => store.state.sidebarOpen);
 
     const sidebarItems = computed(() => {
-      const currentRoute = router
-        .getRoutes()
-        .find((r) => r.path === route.path);
-      return currentRoute?.meta?.submenu || [];
+      let targetPath;
+
+      // check if the current route has a parentRoute meta field
+      if (route.meta?.parentRoute) {
+        targetPath = route.meta.parentRoute;
+      } else {
+        targetPath = route.path;
+      }
+
+      // get all routes
+      const allRoutes = router.getRoutes();
+
+      // first add the main route if it has showInSidebar
+      const mainRoute = allRoutes.find((r) => r.path === targetPath);
+      const items = [];
+
+      if (mainRoute?.meta?.showInSidebar) {
+        items.push({
+          id: `main-${mainRoute.path.replace("/", "") || "home"}`,
+          title: mainRoute.name,
+          path: mainRoute.path,
+        });
+      }
+
+      // then add all child routes that have this path as parent
+      const childRoutes = allRoutes
+        .filter(
+          (r) => r.meta?.parentRoute === targetPath && r.meta?.showInSidebar
+        )
+        .map((r) => ({
+          id: r.path.replace(/\//g, "-") || r.name,
+          title: r.name,
+          path: r.path,
+        }));
+
+      return [...items, ...childRoutes];
     });
 
     const sidebarTitle = computed(() => {
+      // if the current route has a parent, show the parent route name
+      if (route.meta?.parentRoute) {
+        const parentRoute = router
+          .getRoutes()
+          .find((r) => r.path === route.meta.parentRoute);
+        return parentRoute?.name || route.name;
+      }
+
+      // otherwise show the current route name
       return route.name;
     });
 

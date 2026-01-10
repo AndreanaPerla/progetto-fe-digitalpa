@@ -11,34 +11,8 @@ const routes = [
     component: Gallery,
     meta: {
       showInNavbar: true,
+      showInSidebar: true,
       icon: "photo_library",
-      submenu: [
-        {
-          id: "all-photos",
-          title: "Tutte le foto",
-          path: "/",
-        },
-        {
-          id: "recent",
-          title: "Recenti",
-          path: "/recent",
-        },
-        {
-          id: "favorites",
-          title: "Preferite",
-          path: "/favorites",
-        },
-        {
-          id: "albums",
-          title: "Album",
-          path: "/albums",
-        },
-        {
-          id: "search",
-          title: "Cerca",
-          path: "/search",
-        },
-      ],
     },
   },
   {
@@ -47,65 +21,72 @@ const routes = [
     component: Upload,
     meta: {
       showInNavbar: true,
+      showInSidebar: true,
       icon: "cloud_upload",
-      submenu: [
-        {
-          id: "upload-single",
-          title: "Una o più foto",
-          path: "/upload",
-        },
-        {
-          id: "from-camera",
-          title: "Da fotocamera",
-          path: "/upload/camera",
-        },
-        {
-          id: "from-url",
-          title: "Da URL",
-          path: "/upload/url",
-        },
-        {
-          id: "bulk-import",
-          title: "Importazione bulk",
-          path: "/upload/bulk",
-        },
-      ],
     },
   },
   {
     path: "/recent",
     name: "Recenti",
     component: ComingSoon,
+    meta: {
+      parentRoute: "/",
+      showInSidebar: true,
+    },
   },
   {
     path: "/favorites",
     name: "Preferite",
     component: ComingSoon,
+    meta: {
+      parentRoute: "/",
+      showInSidebar: true,
+    },
   },
   {
     path: "/albums",
     name: "Album",
     component: ComingSoon,
+    meta: {
+      parentRoute: "/",
+      showInSidebar: true,
+    },
   },
   {
     path: "/search",
     name: "Cerca",
     component: ComingSoon,
+    meta: {
+      parentRoute: "/",
+      showInSidebar: true,
+    },
   },
   {
     path: "/upload/camera",
     name: "Da fotocamera",
     component: ComingSoon,
+    meta: {
+      parentRoute: "/upload",
+      showInSidebar: true,
+    },
   },
   {
     path: "/upload/url",
     name: "Da URL",
     component: ComingSoon,
+    meta: {
+      parentRoute: "/upload",
+      showInSidebar: true,
+    },
   },
   {
     path: "/upload/bulk",
     name: "Importazione bulk",
     component: ComingSoon,
+    meta: {
+      parentRoute: "/upload",
+      showInSidebar: true,
+    },
   },
   {
     path: "/photo/:id",

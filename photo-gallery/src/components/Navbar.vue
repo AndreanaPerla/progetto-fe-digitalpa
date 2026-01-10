@@ -7,7 +7,7 @@
         :to="route.path"
         @click="handleRouteClick(route)"
         class="sidebar-link mb-2"
-        :class="{ active: $route.path === route.path }"
+        :class="{ active: isRouteActive(route.path) }"
       >
         <span class="material-icons link-icon">{{ route.icon }}</span>
         <div class="link-text mt-2">{{ route.displayName }}</div>
@@ -18,14 +18,27 @@
 
 <script>
 import { computed } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 
 export default {
   name: "Navbar",
   setup() {
     const router = useRouter();
+    const route = useRoute();
     const store = useStore();
+
+    const isRouteActive = (routePath) => {
+      // if the current route matches the given path
+      if (route.path === routePath) {
+        return true;
+      }
+      // if the current route has as parent route the path we are checking
+      if (route.meta?.parentRoute === routePath) {
+        return true;
+      }
+      return false;
+    };
 
     const navbarRoutes = computed(() => {
       return router
@@ -47,6 +60,7 @@ export default {
     return {
       navbarRoutes,
       handleRouteClick,
+      isRouteActive,
     };
   },
 };
