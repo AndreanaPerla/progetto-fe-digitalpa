@@ -104,7 +104,8 @@
   padding: var(--space-xs) var(--space-md);
   font-size: var(--font-size-xs);
   text-transform: uppercase;
-  color: var(--grey);
+  color: var(--main-color);
+  opacity: 0.5;
   font-weight: 500;
 }
 

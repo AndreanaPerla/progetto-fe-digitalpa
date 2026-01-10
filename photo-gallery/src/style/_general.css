@@ -75,3 +75,7 @@ body {
   min-height: calc(100vh - 47px);
   border-radius: var(--radius-xl) 0 0 0;
 }
+
+.page-content {
+  padding: var(--space-md);
+}

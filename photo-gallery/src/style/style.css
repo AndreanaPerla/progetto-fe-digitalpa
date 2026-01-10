@@ -1,6 +1,7 @@
 @import url("./_general.css");
 @import url("./_navbar.css");
 @import url("./_pageHeader.css");
+@import url("./_gallery.css");
 
 @tailwind base;
 @tailwind components;
