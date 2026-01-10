@@ -17,15 +17,15 @@
           <h1 class="page-title">{{ pageTitle }}</h1>
         </div>
         <nav class="breadcrumb" v-if="breadcrumbItems.length > 0">
-          <!-- Icona orologio come primo elemento fisso -->
+          <!-- clock as first element -->
           <span class="breadcrumb-item">
             <span class="material-icons breadcrumb-clock">schedule</span>
             <span class="breadcrumb-separator mx-1">
               <span class="material-icons">chevron_right</span>
             </span>
           </span>
-          
-          <!-- Rest of breadcrumb items -->
+
+          <!-- rest of breadcrumb items -->
           <span
             class="breadcrumb-item"
             v-for="(item, index) in breadcrumbItems"
@@ -48,6 +48,14 @@
           </span>
         </nav>
       </div>
+
+      <!-- btn -->
+      <div class="header-actions">
+        <button @click="handleNewClick" class="new-btn">
+          <span class="material-icons">add</span>
+          Nuovo
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -68,6 +76,10 @@ export default {
 
     const toggleSidebar = () => {
       store.commit("SET_SIDEBAR_OPEN", !store.state.sidebarOpen);
+    };
+
+    const handleNewClick = () => {
+      console.log("Bottone + Nuovo cliccato!");
     };
 
     const pageTitle = computed(() => {
@@ -104,6 +116,7 @@ export default {
       breadcrumbItems,
       isSidebarOpen,
       toggleSidebar,
+      handleNewClick,
     };
   },
 };

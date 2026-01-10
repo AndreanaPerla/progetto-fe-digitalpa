@@ -12,6 +12,12 @@
   border-radius: 0;
 }
 
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .title-section {
   display: flex;
   align-items: center;
@@ -20,6 +26,35 @@
 .title-row {
   display: flex;
   align-items: center;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.new-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background-color: var(--blue);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.new-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.new-btn .material-icons {
+  font-size: var(--font-size-lg);
 }
 
 .sidebar-toggle-btn {
