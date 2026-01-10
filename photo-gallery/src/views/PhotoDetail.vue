@@ -5,14 +5,10 @@
     </div>
 
     <div class="photo-card">
-      <img
-        :src="photo.url"
-        :alt="photo.fileName"
-        class="w-full h-96 object-cover"
-      />
+      <img :src="photo.url" :alt="photo.fileName" class="w-full object-cover" />
 
       <div class="photo-details">
-        <h1 class="photo-title mb-4">
+        <h1 v-if="photo.fileName" class="photo-title mb-4">
           {{ photo.fileName.split(".")[0] }}
         </h1>
 
@@ -21,14 +17,14 @@
           <div>
             <h3 class="mid-title mb-2">Informazioni File</h3>
             <div class="details">
-              <p>
+              <p v-if="photo.fileName">
                 <span class="font-medium">Nome file:</span> {{ photo.fileName }}
               </p>
-              <p>
+              <p v-if="photo.fileSize">
                 <span class="font-medium">Dimensione:</span>
                 {{ photo.fileSize }}
               </p>
-              <p>
+              <p v-if="photo.exifData?.DateTimeOriginal">
                 <span class="font-medium">Data scatto:</span>
                 {{ formatDate(photo.exifData.DateTimeOriginal) }}
               </p>
@@ -36,18 +32,24 @@
           </div>
 
           <!-- camera data -->
-          <div>
+          <div
+            v-if="
+              photo.exifData?.Make ||
+              photo.exifData?.Model ||
+              photo.exifData?.Software
+            "
+          >
             <h3 class="mid-title mb-2">Fotocamera</h3>
             <div class="details">
-              <p>
+              <p v-if="photo.exifData?.Make">
                 <span class="font-medium">Marca:</span>
                 {{ photo.exifData.Make }}
               </p>
-              <p>
+              <p v-if="photo.exifData?.Model">
                 <span class="font-medium">Modello:</span>
                 {{ photo.exifData.Model }}
               </p>
-              <p>
+              <p v-if="photo.exifData?.Software">
                 <span class="font-medium">Software:</span>
                 {{ photo.exifData.Software }}
               </p>
@@ -55,30 +57,30 @@
           </div>
 
           <!-- exposure data -->
-          <div>
+          <div v-if="photo.exifData?.exposureData">
             <h3 class="mid-title mb-2">Dati di Scatto</h3>
             <div class="details">
-              <p>
+              <p v-if="photo.exifData.exposureData.exposureTime">
                 <span class="font-medium">Esposizione:</span>
                 {{ photo.exifData.exposureData.exposureTime }}
               </p>
-              <p>
+              <p v-if="photo.exifData.exposureData.fNumber">
                 <span class="font-medium">Apertura:</span>
                 {{ photo.exifData.exposureData.fNumber }}
               </p>
-              <p>
+              <p v-if="photo.exifData.exposureData.iso">
                 <span class="font-medium">ISO:</span>
                 {{ photo.exifData.exposureData.iso }}
               </p>
-              <p>
+              <p v-if="photo.exifData.exposureData.focalLength">
                 <span class="font-medium">Lunghezza focale:</span>
                 {{ photo.exifData.exposureData.focalLength }}
               </p>
-              <p>
+              <p v-if="photo.exifData.exposureData.exposureMode">
                 <span class="font-medium">Modalità:</span>
                 {{ photo.exifData.exposureData.exposureMode }}
               </p>
-              <p>
+              <p v-if="photo.exifData.exposureData.whiteBalance">
                 <span class="font-medium">Bilanciamento bianco:</span>
                 {{ photo.exifData.exposureData.whiteBalance }}
               </p>
@@ -86,22 +88,29 @@
           </div>
 
           <!-- GPS coordinates -->
-          <div>
+          <div
+            v-if="
+              photo.exifData?.gpsCoordinates &&
+              (photo.exifData.gpsCoordinates.location ||
+                photo.exifData.gpsCoordinates.latitude ||
+                photo.exifData.gpsCoordinates.longitude)
+            "
+          >
             <h3 class="mid-title mb-2">Posizione</h3>
             <div class="details">
-              <p>
+              <p v-if="photo.exifData.gpsCoordinates.location">
                 <span class="font-medium">Località:</span>
                 {{ photo.exifData.gpsCoordinates.location }}
               </p>
-              <p>
+              <p v-if="photo.exifData.gpsCoordinates.latitude">
                 <span class="font-medium">Latitudine:</span>
                 {{ photo.exifData.gpsCoordinates.latitude }}°
               </p>
-              <p>
+              <p v-if="photo.exifData.gpsCoordinates.longitude">
                 <span class="font-medium">Longitudine:</span>
                 {{ photo.exifData.gpsCoordinates.longitude }}°
               </p>
-              <p>
+              <p v-if="photo.exifData.gpsCoordinates.altitude">
                 <span class="font-medium">Altitudine:</span>
                 {{ photo.exifData.gpsCoordinates.altitude }}
               </p>
@@ -137,8 +146,8 @@ export default {
     const formatDate = (dateString) => {
       if (!dateString) return "N/A";
       try {
-        // Formato EXIF: "2023:08:15 14:32:18"
-        // Convertiamo in formato ISO: "2023-08-15T14:32:18"
+        // EXIF format: "2023:08:15 14:32:18"
+        // convert in ISO: "2023-08-15T14:32:18"
         const isoString = dateString.replace(
           /^(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})$/,
           "$1-$2-$3T$4:$5:$6"
@@ -147,7 +156,7 @@ export default {
         const date = new Date(isoString);
 
         if (isNaN(date.getTime())) {
-          return dateString; // Ritorna la stringa originale se la conversione fallisce
+          return dateString; // return the original string if the conversion fails
         }
 
         return date.toLocaleDateString("it-IT", {
@@ -158,7 +167,7 @@ export default {
           minute: "2-digit",
         });
       } catch (error) {
-        return dateString; // Ritorna la stringa originale in caso di errore
+        return dateString; // return the original string in case of error
       }
     };
 
