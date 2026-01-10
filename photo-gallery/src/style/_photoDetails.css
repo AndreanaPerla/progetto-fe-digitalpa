@@ -1,0 +1,50 @@
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background-color: var(--blue);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.back-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.photo-card {
+  background-color: var(--white);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--grey);
+}
+
+.photo-details {
+  padding: var(--space-lg);
+}
+
+.photo-title {
+  color: var(--main-color);
+  font-weight: 700;
+  font-size: var(--font-size-2xl);
+}
+
+.mid-title {
+  font-size: var(--font-size-base);
+  text-transform: uppercase;
+  color: var(--main-color);
+  opacity: 0.5;
+  font-weight: 500;
+}
+
+.details {
+  font-size: var(--font-size-base);
+  color: var(--content);
+  font-weight: 400;
+}

@@ -2,6 +2,7 @@
 @import url("./_navbar.css");
 @import url("./_pageHeader.css");
 @import url("./_gallery.css");
+@import url("./_photoDetails.css");
 
 @tailwind base;
 @tailwind components;
