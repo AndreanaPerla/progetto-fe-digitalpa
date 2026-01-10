@@ -4,6 +4,7 @@
       <div class="title-section">
         <div class="title-row">
           <button
+            v-if="showSidebarToggle"
             @click="toggleSidebar"
             class="sidebar-toggle-btn"
             :class="{ active: isSidebarOpen }"
@@ -74,6 +75,11 @@ export default {
 
     const isSidebarOpen = computed(() => store.state.sidebarOpen);
 
+    const showSidebarToggle = computed(() => {
+      // Nascondi il bottone sidebar per route che non hanno submenu
+      return route.name !== 'PhotoDetail';
+    });
+
     const toggleSidebar = () => {
       store.commit("SET_SIDEBAR_OPEN", !store.state.sidebarOpen);
     };
@@ -115,6 +121,7 @@ export default {
       pageTitle,
       breadcrumbItems,
       isSidebarOpen,
+      showSidebarToggle,
       toggleSidebar,
       handleNewClick,
     };

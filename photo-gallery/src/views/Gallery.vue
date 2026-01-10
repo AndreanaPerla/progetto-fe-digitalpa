@@ -1,9 +1,14 @@
 <template>
-  <div class="container m-auto">
-    <div v-if="isLoading" class="loading">
-      <p>Caricamento foto...</p>
+  <!-- full page loader -->
+  <div v-if="isLoading" class="fullpage-loader">
+    <div class="loader-content">
+      <div class="spinner"></div>
+      <p class="loader-text">Caricamento foto...</p>
     </div>
+  </div>
 
+  <!-- main content -->
+  <div v-else class="container m-auto">
     <div v-if="error" class="text-center text-red-600">
       <p>Errore nel caricamento: {{ error }}</p>
     </div>
@@ -18,12 +23,26 @@
         :to="{ name: 'PhotoDetail', params: { id: photo.id } }"
         class="photo"
       >
-        <img
-          :src="photo.url"
-          :alt="photo.fileName"
-          class="photo-image"
-        />
+        <div class="photo-container">
+          <img
+            :src="photo.url"
+            :alt="photo.fileName"
+            class="photo-image"
+            loading="lazy"
+            @load="handleImageLoad"
+            @error="handleImageError"
+          />
+          <div class="photo-placeholder">
+            <span class="material-icons">image</span>
+          </div>
+        </div>
       </router-link>
+    </div>
+
+    <!-- empty state if there are no photos -->
+    <div v-if="!isLoading && photos.length === 0 && !error" class="empty-state">
+      <span class="material-icons empty-icon">photo_library</span>
+      <p class="empty-text">Nessuna foto disponibile</p>
     </div>
   </div>
 </template>
@@ -45,6 +64,28 @@ export default {
       store.dispatch("fetchPhotos");
     };
 
+    const handleImageLoad = (event) => {
+      const img = event.target;
+      const placeholder = img.nextElementSibling;
+
+      img.classList.add("loaded");
+      if (placeholder) {
+        placeholder.style.display = "none";
+      }
+    };
+
+    const handleImageError = (event) => {
+      const img = event.target;
+      const placeholder = img.nextElementSibling;
+
+      img.style.display = "none";
+      if (placeholder) {
+        placeholder.innerHTML =
+          '<span class="material-icons">broken_image</span>';
+        placeholder.classList.add("error");
+      }
+    };
+
     onMounted(() => {
       fetchPhotos();
     });
@@ -54,6 +95,8 @@ export default {
       isLoading,
       error,
       fetchPhotos,
+      handleImageLoad,
+      handleImageError,
     };
   },
 };

@@ -3,12 +3,13 @@
   border-bottom: 1px solid var(--grey);
   background-color: var(--white);
   border-radius: var(--radius-xxl) 0 0 0;
-  transition: margin-left 0.3s ease, background-color 0.3s ease,
-    border-radius 0.3s ease;
+  transition: margin-left 0.12s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.12s cubic-bezier(0.4, 0, 0.2, 1),
+    border-radius 0.12s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .page-header.with-sidebar {
-  margin-left: var(--sidebar-width);
+  /* margin-left: var(--sidebar-width); */
   border-radius: 0;
 }
 

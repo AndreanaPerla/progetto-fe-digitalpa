@@ -1,11 +1,31 @@
 <template>
-  <div v-if="photo" class="container m-auto">
+  <!-- full page loader -->
+  <div v-if="isLoading" class="fullpage-loader">
+    <div class="loader-content">
+      <div class="spinner"></div>
+      <p class="loader-text">Caricamento foto...</p>
+    </div>
+  </div>
+
+  <!-- photo content -->
+  <div v-else-if="photo" class="container m-auto">
     <div class="mb-6">
       <button @click="$router.go(-1)" class="back-btn">← Indietro</button>
     </div>
 
     <div class="photo-card">
-      <img :src="photo.url" :alt="photo.fileName" class="w-full object-cover" />
+      <div class="photo-image-container">
+        <img
+          :src="photo.url"
+          :alt="photo.fileName"
+          class="photo-detail-image"
+          @load="handleImageLoad"
+          @error="handleImageError"
+        />
+        <div class="photo-image-placeholder" v-if="imageLoading">
+          <div class="image-spinner"></div>
+        </div>
+      </div>
 
       <div class="photo-details">
         <h1 v-if="photo.fileName" class="photo-title mb-4">
@@ -127,7 +147,7 @@
 </template>
 
 <script>
-import { computed } from "vue";
+import { computed, ref, watch, onMounted } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 
@@ -136,11 +156,41 @@ export default {
   setup() {
     const store = useStore();
     const route = useRoute();
+    const imageLoading = ref(true);
 
     const photos = computed(() => store.getters.getPhotos);
+    const storeLoading = computed(() => store.getters.isLoading);
+
     const photo = computed(() => {
       const photoId = route.params.id;
       return photos.value.find((p) => p.id === photoId);
+    });
+
+    const isLoading = computed(() => {
+      return storeLoading.value || photos.value.length === 0;
+    });
+
+    const handleImageLoad = () => {
+      imageLoading.value = false;
+    };
+
+    const handleImageError = () => {
+      imageLoading.value = false;
+    };
+
+    // Reset image loading quando cambia foto
+    watch(
+      () => route.params.id,
+      () => {
+        imageLoading.value = true;
+      }
+    );
+
+    // Assicurati che le foto siano caricate
+    onMounted(() => {
+      if (photos.value.length === 0) {
+        store.dispatch("fetchPhotos");
+      }
     });
 
     const formatDate = (dateString) => {
@@ -173,6 +223,10 @@ export default {
 
     return {
       photo,
+      isLoading,
+      imageLoading,
+      handleImageLoad,
+      handleImageError,
       formatDate,
     };
   },
