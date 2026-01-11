@@ -61,7 +61,10 @@ export default {
     const error = computed(() => store.getters.getError);
 
     const fetchPhotos = () => {
-      store.dispatch("fetchPhotos");
+      // if there are no photos in the store, fetch them
+      if (store.getters.getPhotos.length === 0) {
+        store.dispatch("fetchPhotos");
+      }
     };
 
     const handleImageLoad = (event) => {

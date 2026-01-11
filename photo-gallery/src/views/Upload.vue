@@ -21,7 +21,7 @@
             <span class="material-icons mx-auto text-6xl"> cloud_upload </span>
             <p class="font-medium">Clicca per selezionare le immagini</p>
             <p class="mt-2">o trascina i file qui</p>
-            <p class="mt-3">Formati supportati: JPG, PNG, GIF, WEBP</p>
+            <p class="mt-3">Formati supportati: JPG, PNG, SVG, GIF, WEBP</p>
           </div>
         </label>
       </div>
@@ -57,21 +57,48 @@
       </div>
 
       <div class="mt-8 flex justify-center">
-        <button @click="uploadImages" class="blue-btn">
-          Carica {{ selectedImages.length }} immagini
+        <button
+          @click="uploadImages"
+          class="blue-btn"
+          :disabled="isLoading || isUploading"
+          :class="{ 'opacity-50 cursor-not-allowed': isLoading || isUploading }"
+        >
+          <span v-if="isLoading || isUploading" class="flex items-center gap-2">
+            <span class="material-icons animate-spin text-base">sync</span>
+            Caricamento in corso...
+          </span>
+          <span v-else> Carica {{ selectedImages.length }} immagini </span>
         </button>
+      </div>
+    </div>
+
+    <!-- loading overlay durante l'upload -->
+    <div v-if="isLoading || isUploading" class="loading-overlay">
+      <div class="loading-box">
+        <span class="material-icons animate-spin mx-auto mb-4"> sync </span>
+        <p class="upload-name font-medium">Caricamento immagini in corso...</p>
+        <p class="upload-name mt-1">
+          Attendere, sarai reindirizzato alla galleria
+        </p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 export default {
   name: "Upload",
   setup() {
+    const store = useStore();
+    const router = useRouter();
     const selectedImages = ref([]);
+    const isUploading = ref(false);
+
+    const isLoading = computed(() => store.getters.isLoading);
 
     const handleFileSelect = (event) => {
       const files = Array.from(event.target.files);
@@ -111,17 +138,32 @@ export default {
       selectedImages.value = [];
     };
 
-    const uploadImages = () => {
-      // here you would implement the actual upload logic
-      console.log("Uploading", selectedImages.value.length, "images");
-      // for now, just show a message
-      alert(
-        `Funzionalità di caricamento in sviluppo. ${selectedImages.value.length} immagini pronte per il caricamento.`
-      );
+    const uploadImages = async () => {
+      if (selectedImages.value.length === 0) return;
+
+      isUploading.value = true;
+
+      try {
+        // upload images to the store
+        await store.dispatch("uploadPhotos", selectedImages.value);
+
+        // reset the selection
+        selectedImages.value = [];
+
+        // redirect to the Gallery
+        router.push("/");
+      } catch (error) {
+        console.error("Errore durante l'upload:", error);
+        alert("Errore durante il caricamento delle immagini. Riprova.");
+      } finally {
+        isUploading.value = false;
+      }
     };
 
     return {
       selectedImages,
+      isUploading,
+      isLoading,
       handleFileSelect,
       removeImage,
       clearSelection,
