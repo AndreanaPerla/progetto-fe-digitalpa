@@ -77,7 +77,18 @@
           </div>
 
           <!-- exposure data -->
-          <div v-if="photo.exifData?.exposureData">
+          <div
+            v-if="
+              photo.exifData?.exposureData &&
+              (photo.exifData.exposureData.exposureTime ||
+                photo.exifData.exposureData.fNumber ||
+                photo.exifData.exposureData.iso ||
+                photo.exifData.exposureData.focalLength ||
+                photo.exifData.exposureData.exposureMode ||
+                photo.exifData.exposureData.whiteBalance ||
+                photo.exifData.exposureData.flash)
+            "
+          >
             <h3 class="mid-title mb-2">Dati di Scatto</h3>
             <div class="details">
               <p v-if="photo.exifData.exposureData.exposureTime">

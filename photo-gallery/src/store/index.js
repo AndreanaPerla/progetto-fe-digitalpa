@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import Photo from "@/models/Photo.js";
 
 export default createStore({
   state: {
@@ -29,7 +30,10 @@ export default createStore({
       commit("SET_LOADING", true);
       try {
         const response = await fetch("/src/assets/photos-data.json");
-        const photos = await response.json();
+        const photosData = await response.json();
+
+        // convert json data to Photo objects
+        const photos = photosData.map((data) => Photo.createFromJSON(data));
 
         // if there are already photos in the store,
         // add only those from the JSON that are not already present
@@ -62,17 +66,10 @@ export default createStore({
             ? Math.max(...state.photos.map((p) => parseInt(p.id)))
             : 0;
 
-        // convert files to photo objects compatible with the gallery
-        const newPhotos = imageFiles.map((imageData, index) => ({
-          id: String(maxId + index + 1).padStart(3, "0"),
-          url: imageData.url,
-          fileName: imageData.name,
-          fileSize: `${(imageData.size / (1024 * 1024)).toFixed(1)} MB`,
-          exifData: {
-            Make: "User Upload",
-            Software: "Photo Gallery Upload",
-          },
-        }));
+        // convert files to Photo objects using the factory method
+        const newPhotos = imageFiles.map((imageData, index) =>
+          Photo.createFromUpload(imageData, maxId + index + 1)
+        );
 
         commit("ADD_PHOTOS", newPhotos);
         commit("SET_ERROR", null);
