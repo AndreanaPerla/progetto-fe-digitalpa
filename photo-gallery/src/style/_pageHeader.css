@@ -7,11 +7,14 @@
   height: var(--radius-xxl);
   background: var(--main-color);
   z-index: 50;
-  transition: left 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: left 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  /* optimization */
+  will-change: left;
+  backface-visibility: hidden;
 }
 
 .header-corner-background.with-sidebar {
-  left: calc(88px + var(--sidebar-width));
+  left: var(--sidebar-width);
 }
 
 .page-header {
@@ -27,10 +30,12 @@
   background-color: var(--white);
   border-radius: var(--radius-xxl) 0 0 0;
   z-index: 101;
-  transition: left 0.12s cubic-bezier(0.4, 0, 0.2, 1),
-    width 0.12s cubic-bezier(0.4, 0, 0.2, 1),
-    background-color 0.12s cubic-bezier(0.4, 0, 0.2, 1),
-    border-radius 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: left 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+    width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+    border-radius 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  /* optimization */
+  will-change: left, width;
+  backface-visibility: hidden;
 }
 
 .page-header.with-sidebar {

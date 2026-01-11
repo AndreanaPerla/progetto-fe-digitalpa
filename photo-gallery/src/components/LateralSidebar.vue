@@ -1,23 +1,21 @@
 <template>
-  <transition name="submenu-slide">
-    <aside v-if="isOpen" class="submenu-sidebar">
-      <div class="submenu-header">
-        <h3 class="submenu-title mb-1">{{ sidebarTitle }}</h3>
-      </div>
-      <nav class="submenu-nav">
-        <router-link
-          v-for="item in sidebarItems"
-          :key="item.id"
-          :to="item.path"
-          @click="closeSidebar"
-          class="submenu-link"
-          :class="{ active: $route.path === item.path }"
-        >
-          <span class="submenu-text">{{ item.title }}</span>
-        </router-link>
-      </nav>
-    </aside>
-  </transition>
+  <aside class="submenu-sidebar" :class="{ 'is-open': isOpen }">
+    <div class="submenu-header">
+      <h3 class="submenu-title mb-1">{{ sidebarTitle }}</h3>
+    </div>
+    <nav class="submenu-nav">
+      <router-link
+        v-for="item in sidebarItems"
+        :key="item.id"
+        :to="item.path"
+        @click="closeSidebar"
+        class="submenu-link"
+        :class="{ active: $route.path === item.path }"
+      >
+        <span class="submenu-text">{{ item.title }}</span>
+      </router-link>
+    </nav>
+  </aside>
 </template>
 
 <script>

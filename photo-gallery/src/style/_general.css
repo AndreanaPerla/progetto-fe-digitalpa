@@ -46,12 +46,18 @@
 
 * {
   font-family: var(--font-family);
+  scroll-behavior: smooth;
 }
 
 body {
   background-color: var(--main-color);
   margin: 0;
   padding: 0;
+  /* optimization */
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
 }
 
 /* #app-main {
@@ -76,7 +82,10 @@ body {
   background-color: var(--light-blue);
   min-height: calc(100vh - 47px);
   border-radius: var(--radius-xl) 0 0 0;
-  transition: margin-left 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: margin-left 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  /* optimization */
+  will-change: margin-left;
+  backface-visibility: hidden;
 }
 
 .main-content.with-submenu {

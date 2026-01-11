@@ -75,7 +75,6 @@
   font-weight: 700;
 }
 
-/* submenu-sidebar */
 .submenu-sidebar {
   position: fixed;
   left: 88px;
@@ -89,6 +88,16 @@
   display: flex;
   flex-direction: column;
   padding: 69.2px 0 var(--space-sm) 0;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  /* optimization */
+  transform: translate3d(-100%, 0, 0);
+  will-change: transform;
+  contain: layout style paint;
+  backface-visibility: hidden;
+}
+
+.submenu-sidebar.is-open {
+  transform: translate3d(0, 0, 0);
 }
 
 .submenu-header,
