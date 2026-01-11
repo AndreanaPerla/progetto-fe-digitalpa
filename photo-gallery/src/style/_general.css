@@ -72,6 +72,7 @@ body {
   flex: 1;
   margin-left: 88px;
   margin-top: 47px;
+  padding-top: 70px; /* header fixed */
   background-color: var(--light-blue);
   min-height: calc(100vh - 47px);
   border-radius: var(--radius-xl) 0 0 0;

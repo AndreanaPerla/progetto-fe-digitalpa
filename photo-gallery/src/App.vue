@@ -2,6 +2,10 @@
   <div id="app-main">
     <div class="app-top"></div>
     <Navbar />
+    <div
+      class="header-corner-background"
+      :class="{ 'with-sidebar': isSubmenuOpen }"
+    ></div>
     <main class="main-content" :class="{ 'with-submenu': isSubmenuOpen }">
       <PageHeader />
       <div class="page-content">
