@@ -8,7 +8,7 @@
   </div>
 
   <!-- main content -->
-  <div v-else class="container m-auto">
+  <div v-else class="container mx-auto">
     <div v-if="error" class="text-center text-red-600">
       <p>Errore nel caricamento: {{ error }}</p>
     </div>

@@ -52,7 +52,7 @@
 
       <!-- btn -->
       <div class="header-actions">
-        <button @click="handleNewClick" class="new-btn">
+        <button @click="handleNewClick" class="blue-btn">
           <span class="material-icons">add</span>
           Nuovo
         </button>
@@ -77,7 +77,7 @@ export default {
 
     const showSidebarToggle = computed(() => {
       // Nascondi il bottone sidebar per route che non hanno submenu
-      return route.name !== 'PhotoDetail';
+      return route.name !== "PhotoDetail";
     });
 
     const toggleSidebar = () => {

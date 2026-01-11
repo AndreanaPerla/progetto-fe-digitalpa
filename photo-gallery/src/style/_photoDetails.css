@@ -54,7 +54,6 @@
   position: relative;
   width: 100%;
   background-color: var(--white);
-  border-radius: var(--radius-sm);
   overflow: hidden;
 }
 

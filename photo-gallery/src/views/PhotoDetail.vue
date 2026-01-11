@@ -8,7 +8,7 @@
   </div>
 
   <!-- photo content -->
-  <div v-else-if="photo" class="container m-auto">
+  <div v-else-if="photo" class="container mx-auto">
     <div class="mb-6">
       <button @click="$router.go(-1)" class="back-btn">← Indietro</button>
     </div>

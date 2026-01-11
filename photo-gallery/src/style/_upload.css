@@ -1,0 +1,82 @@
+.title {
+  font-size: var(--font-size-2xl);
+  color: var(--content);
+  font-weight: 400;
+}
+
+.upload-form-container {
+  background-color: var(--white);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  border: 1px solid var(--grey);
+}
+
+.upload-form {
+  border: 1px dashed var(--grey);
+  border-radius: var(--radius-sm);
+  padding: var(--space-lg);
+  text-align: center;
+  cursor: pointer;
+}
+
+.upload-form:hover {
+  border-color: var(--blue);
+}
+
+.upload-instructions {
+  font-size: var(--font-size-base);
+  color: var(--content);
+  opacity: 0.7;
+  font-weight: 400;
+}
+
+.upload-remove {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--font-size-sm);
+}
+
+.upload-remove p {
+  color: var(--content);
+  opacity: 0.7;
+}
+
+.upload-remove button:hover {
+  text-decoration: underline;
+}
+
+.upload-photo {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  object-fit: cover;
+  transform: translateZ(0);
+  height: 30vh;
+  width: 100%;
+}
+
+.upload-photo:hover {
+  transform: translateY(-1px) translateZ(0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.remove-btn {
+  position: absolute;
+  top: var(--space-xs);
+  right: var(--space-xs);
+  color: var(--white);
+  border-radius: 50%;
+  width: var(--space-lg);
+  height: var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.upload-name {
+  font-size: var(--font-size-sm);
+  color: var(--content);
+  font-weight: 400;
+}

@@ -65,6 +65,7 @@ body {
   right: 0;
   height: 47px;
   background-color: var(--main-color);
+  z-index: 99;
 }
 
 .main-content {
@@ -130,4 +131,28 @@ body {
   color: var(--main-color);
   margin: 0;
   font-weight: 500;
+}
+
+.blue-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background-color: var(--blue);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.blue-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.blue-btn .material-icons {
+  font-size: var(--font-size-lg);
 }

@@ -3,6 +3,7 @@
 @import url("./_pageHeader.css");
 @import url("./_gallery.css");
 @import url("./_photoDetails.css");
+@import url("./_upload.css");
 
 @tailwind base;
 @tailwind components;
